@@ -60,7 +60,7 @@ export function ExpenseForm() {
     },
   });
 
-  const { mutate: submitExpense, isLoading } = useMutation({
+  const { mutate: submitExpense, isPending } = useMutation({
     mutationFn: (data: ExpenseFormValues) =>
       createExpense({
         amount: Number(data.amount),
@@ -104,7 +104,7 @@ export function ExpenseForm() {
                   type="number"
                   placeholder="0.00"
                   {...field}
-                  disabled={isLoading}
+                  disabled={isPending}
                 />
               </FormControl>
               <FormMessage />
@@ -121,7 +121,7 @@ export function ExpenseForm() {
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                disabled={isLoading}
+                disabled={isPending}
               >
                 <FormControl>
                   <SelectTrigger>
@@ -151,7 +151,7 @@ export function ExpenseForm() {
                 <Input
                   placeholder="Enter description"
                   {...field}
-                  disabled={isLoading}
+                  disabled={isPending}
                 />
               </FormControl>
               <FormMessage />
@@ -166,15 +166,15 @@ export function ExpenseForm() {
             <FormItem>
               <FormLabel>Date</FormLabel>
               <FormControl>
-                <Input type="date" {...field} disabled={isLoading} />
+                <Input type="date" {...field} disabled={isPending} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Adding Expense..." : "Add Expense"}
+        <Button type="submit" className="w-full" disabled={isPending}>
+          {isPending ? "Adding Expense..." : "Add Expense"}
         </Button>
       </form>
     </Form>
