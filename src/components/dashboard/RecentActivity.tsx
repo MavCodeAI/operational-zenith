@@ -5,6 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+interface RecentActivityProps {
+  className?: string;
+}
 
 const activities = [
   {
@@ -27,9 +32,9 @@ const activities = [
   },
 ];
 
-export function RecentActivity() {
+export function RecentActivity({ className }: RecentActivityProps) {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
         <CardTitle>Recent Activity</CardTitle>
         <CardDescription>Latest updates from your business</CardDescription>
