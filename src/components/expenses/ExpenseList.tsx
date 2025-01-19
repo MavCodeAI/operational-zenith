@@ -25,15 +25,13 @@ interface ExpenseListProps {
 
 export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   const filteredExpenses = expenses.filter((expense) => {
     const matchesSearch =
       expense.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (expense.category?.toLowerCase() || "").includes(searchTerm.toLowerCase());
-    const matchesCategory = categoryFilter
-      ? expense.category === categoryFilter
-      : true;
+    const matchesCategory = categoryFilter === "all" ? true : expense.category === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
@@ -66,10 +64,10 @@ export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
             <SelectValue placeholder="Filter by category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Categories</SelectItem>
+            <SelectItem value="all">All Categories</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category} value={category}>
-                {category ? category.charAt(0).toUpperCase() + category.slice(1) : ""}
+                {category ? category.charAt(0).toUpperCase() + category.slice(1) : "Uncategorized"}
               </SelectItem>
             ))}
           </SelectContent>
