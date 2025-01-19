@@ -15,26 +15,32 @@ const activities = [
   {
     id: 1,
     type: "sale",
-    description: "New sale: Order #1234",
+    description: "New order: 50x Premium Prayer Caps (White)",
     timestamp: "2 minutes ago",
   },
   {
     id: 2,
     type: "inventory",
-    description: "Low stock alert: Product XYZ",
+    description: "Low stock alert: Classic Black Caps (Size L)",
     timestamp: "1 hour ago",
   },
   {
     id: 3,
-    type: "expense",
-    description: "New expense recorded: Office supplies",
+    type: "delivery",
+    description: "COD Payment received: Order #1234",
     timestamp: "3 hours ago",
+  },
+  {
+    id: 4,
+    type: "packaging",
+    description: "Premium gift boxes running low",
+    timestamp: "5 hours ago",
   },
 ];
 
 export function RecentActivity({ className }: RecentActivityProps) {
   return (
-    <Card className={className}>
+    <Card className={cn("", className)}>
       <CardHeader>
         <CardTitle>Recent Activity</CardTitle>
         <CardDescription>Latest updates from your business</CardDescription>
