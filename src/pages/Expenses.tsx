@@ -1,6 +1,33 @@
 import { Layout } from "@/components/layout/Layout";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { ExpenseForm } from "@/components/expenses/ExpenseForm";
+import { ExpenseList } from "@/components/expenses/ExpenseList";
+import { DollarSign, TrendingDown, Receipt, PieChart } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, TrendingDown, Receipt } from "lucide-react";
+
+const mockExpenses = [
+  {
+    id: "1",
+    date: "2024-03-15",
+    category: "overhead",
+    description: "Office Rent",
+    amount: 25000,
+  },
+  {
+    id: "2",
+    date: "2024-03-14",
+    category: "marketing",
+    description: "Facebook Ads",
+    amount: 15000,
+  },
+  {
+    id: "3",
+    date: "2024-03-13",
+    category: "salary",
+    description: "Staff Salaries",
+    amount: 45000,
+  },
+];
 
 const Expenses = () => {
   return (
@@ -13,57 +40,53 @@ const Expenses = () => {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            title="Total Expenses"
+            value="PKR 85,231"
+            description="This month"
+            icon={DollarSign}
+          />
+          <StatCard
+            title="Monthly Change"
+            value="-5.2%"
+            description="Compared to last month"
+            icon={TrendingDown}
+            trend="down"
+          />
+          <StatCard
+            title="Pending Bills"
+            value="12"
+            description="Need attention"
+            icon={Receipt}
+          />
+          <StatCard
+            title="Top Category"
+            value="Overhead"
+            description="35% of expenses"
+            icon={PieChart}
+          />
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <CardHeader>
+              <CardTitle>Add New Expense</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">PKR 45,231</div>
-              <p className="text-xs text-muted-foreground">
-                This month
-              </p>
+              <ExpenseForm />
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Monthly Change</CardTitle>
-              <TrendingDown className="h-4 w-4 text-red-500" />
+            <CardHeader>
+              <CardTitle>Recent Expenses</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">-5.2%</div>
-              <p className="text-xs text-muted-foreground">
-                Compared to last month
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Pending Bills</CardTitle>
-              <Receipt className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">12</div>
-              <p className="text-xs text-muted-foreground">
-                Need attention
-              </p>
+              <ExpenseList expenses={mockExpenses} />
             </CardContent>
           </Card>
         </div>
-
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle>Recent Expenses</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Recent expenses list will be implemented here.
-            </p>
-          </CardContent>
-        </Card>
       </div>
     </Layout>
   );
