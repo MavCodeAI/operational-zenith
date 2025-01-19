@@ -24,13 +24,15 @@ const Sales = () => {
   const { data: sales, isLoading } = useQuery({
     queryKey: ["sales"],
     queryFn: getSales,
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to fetch sales",
-        variant: "destructive",
-      });
-    },
+    meta: {
+      onError: () => {
+        toast({
+          title: "Error",
+          description: "Failed to fetch sales",
+          variant: "destructive",
+        });
+      }
+    }
   });
 
   const filteredSales = sales?.filter(sale =>

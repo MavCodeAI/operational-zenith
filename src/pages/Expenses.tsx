@@ -4,14 +4,16 @@ import { ExpenseForm } from "@/components/expenses/ExpenseForm";
 import { ExpenseList } from "@/components/expenses/ExpenseList";
 import { DollarSign, TrendingDown, Receipt, PieChart } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Expense } from "@/types";
 
-const mockExpenses = [
+const mockExpenses: Expense[] = [
   {
     id: "1",
     date: "2024-03-15",
     category: "overhead",
     description: "Office Rent",
     amount: 25000,
+    status: "approved"
   },
   {
     id: "2",
@@ -19,6 +21,7 @@ const mockExpenses = [
     category: "marketing",
     description: "Facebook Ads",
     amount: 15000,
+    status: "pending"
   },
   {
     id: "3",
@@ -26,6 +29,7 @@ const mockExpenses = [
     category: "salary",
     description: "Staff Salaries",
     amount: 45000,
+    status: "pending"
   },
 ];
 

@@ -24,13 +24,15 @@ const Inventory = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to fetch products",
-        variant: "destructive",
-      });
-    },
+    meta: {
+      onError: () => {
+        toast({
+          title: "Error",
+          description: "Failed to fetch products",
+          variant: "destructive",
+        });
+      }
+    }
   });
 
   const filteredProducts = products?.filter(product =>

@@ -30,7 +30,7 @@ export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
   const filteredExpenses = expenses.filter((expense) => {
     const matchesSearch =
       expense.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      expense.category.toLowerCase().includes(searchTerm.toLowerCase());
+      (expense.category?.toLowerCase() || "").includes(searchTerm.toLowerCase());
     const matchesCategory = categoryFilter
       ? expense.category === categoryFilter
       : true;
@@ -38,7 +38,7 @@ export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
   });
 
   const categories = Array.from(
-    new Set(expenses.map((expense) => expense.category))
+    new Set(expenses.map((expense) => expense.category).filter(Boolean))
   );
 
   if (isLoading) {
@@ -69,7 +69,7 @@ export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
             <SelectItem value="">All Categories</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category ? category.charAt(0).toUpperCase() + category.slice(1) : ""}
               </SelectItem>
             ))}
           </SelectContent>
@@ -103,7 +103,7 @@ export function ExpenseList({ expenses, isLoading }: ExpenseListProps) {
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {expense.status.charAt(0).toUpperCase() + expense.status.slice(1)}
+                    {expense.status ? expense.status.charAt(0).toUpperCase() + expense.status.slice(1) : ""}
                   </span>
                 </TableCell>
                 <TableCell className="text-right">
